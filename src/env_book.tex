@@ -11,11 +11,35 @@
 \setuppapersize[letter,portrait]
 
 % Font definitions
+\starttypescript [ebgaramond]
+  \definefontsynonym[EBGaramond-Regular]    [file:EBGaramond-Regular]
+  \definefontsynonym[EBGaramond-Italic]     [file:EBGaramond-Italic]
+  \definefontsynonym[EBGaramond-Bold]       [file:EBGaramond-Bold]
+  \definefontsynonym[EBGaramond-BoldItalic] [file:EBGaramond-BoldItalic]
+\stoptypescript
+
+\starttypescript [ebgaramond]
+  \setups[font:fallback:serif]
+  \definefontsynonym[Serif]                [EBGaramond-Regular]    [features=default]
+  \definefontsynonym[SerifItalic]          [EBGaramond-Italic]     [features=default]
+  \definefontsynonym[SerifBold]            [EBGaramond-Bold]       [features=default]
+  \definefontsynonym[SerifBoldItalic]      [EBGaramond-BoldItalic] [features=default]
+\stoptypescript
+
+\starttypescript [ebgaramond]
+  \definetypeface [ebgaramond]    [rm] [serif] [ebgaramond]    [default]
+\stoptypescript
+
+\setupbodyfont[ebgaramond]
+\setupbodyfont[12pt]
+
+% A one-off definition for section titles
 \definefont[FacesTitle][file:Abrakadaboom-KVEED*default at 48pt]
 
-% Hide page numbers, show the book name in the header
+% Show the book name and page number in the footer
 \setuppagenumbering[]
-\setupheadertexts[Familiar Faces]
+\setupheadertexts[]
+\setupfootertexts[Familiar Faces][pagenumber]
 
 % Don't show section numbers
 \setupheads[number=no]
@@ -24,11 +48,17 @@
 \setuphead[title][style=FacesTitle,align=middle]
 \setuphead[section][align=middle]
 
+% A custom style - a "subsection"
+\define[1]\subtitle{\startalignment[middle] \tfxx{#1} \stopalignment}
+
 % Space between paragraphs
 \setupwhitespace[halfline]
 
 % Some sections will be multi-column
 \setupcolumns[TwoColumn]
+
+% Define a macro used to indicate game terms - right now this just bolds the text
+\define[1]\gameterm{\bf{#1}}
 
 % Don't add extra whitespace in itemized lists
 \setupitemize[packed]
