@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  buildpdf:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
@@ -26,5 +26,5 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: pdf
+          name: familiar-faces
           path: out/familiar-faces.pdf
