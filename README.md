@@ -9,4 +9,3 @@ Work checklist:
 
 - More interview questions
 - Acknowledgements
-- Body font

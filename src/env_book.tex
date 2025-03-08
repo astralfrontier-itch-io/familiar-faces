@@ -45,8 +45,9 @@
 \setupheads[number=no]
 
 % Set up header styles
-\setuphead[title][style=FacesTitle,align=middle]
-\setuphead[section][align=middle]
+\setuphead[title][align=middle,style=FacesTitle]
+\setuphead[section][align=middle,style=\tfb\bf,deeptextcommand=\underbar]
+\setuphead[subsection][align=middle,style=\bf,deeptextcommand=\underbar]
 
 % A custom style - a "subsection"
 \define[1]\subtitle{\startalignment[middle] \tfxx{#1} \stopalignment}
@@ -62,6 +63,10 @@
 
 % Don't add extra whitespace in itemized lists
 \setupitemize[packed]
+
+% For some lists, we want some padding
+\definenarrower[SmallNarrower][left=1cm,right=1cm]
+\definenarrower[FullPageNarrower][left=.1\textwidth,right=.1\textwidth]
 
 % Image path configuration
 \setupexternalfigures[directory=.,location=local]
