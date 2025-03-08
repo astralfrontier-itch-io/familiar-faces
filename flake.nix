@@ -21,6 +21,9 @@
           src = self;
           buildPhase = ''
             pushd src/
+            export OSFONTDIR=$PWD/fonts
+            mtxrun --generate
+            mtxrun --script fonts --reload
             context ${projectname}.tex --purgeall
           '';
           installPhase = ''
