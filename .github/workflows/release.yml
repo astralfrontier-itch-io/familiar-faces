@@ -1,12 +1,12 @@
-name: "Build PDF"
+name: "Release PDF"
 
 on:
-  pull_request:
-  push:
-    branches: [main]
+  release:
+    types:
+      - published
 
 jobs:
-  buildpdf:
+  releasepdf:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
@@ -23,8 +23,11 @@ jobs:
         run: |
           mkdir familiar-faces
           cp result/*.pdf familiar-faces/
-      - name: Publish Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: familiar-faces
-          path: familiar-faces
+      - uses: yeslayla/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: pdf
+          ITCH_GAME: familiar-faces
+          ITCH_USER: astralfrontier
+          PACKAGE: familiar-faces
+          VERSION: ${{ github.ref_name }}
